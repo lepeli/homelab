@@ -20,8 +20,13 @@ provider "proxmox" {
 
 resource "proxmox_vm_qemu" "cloud-init-test" {
   name = "cloudinit-test-vm"
-  desc = "Première machine construire à l'aide de terraform"
+  desc = "Première machine construite à l'aide de terraform"
   target_node = "yvan-lab-02"
+
+  # Specifications
+  memory = 4096 # 4Go de ram
+  cores   = 3
+  sockets = 1
 
   clone = "debian-cloud-init" # On clone une machine contenant une image cloudinit.
 
@@ -47,6 +52,5 @@ resource "proxmox_vm_qemu" "cloud-init-test" {
   sshkeys = <<EOF
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJq8ZUykN58S9tGCelIG0EpEVBWD4QgB5Zi3rEI1qiA9 pcportable-yvan
 EOF
-
 
 }
